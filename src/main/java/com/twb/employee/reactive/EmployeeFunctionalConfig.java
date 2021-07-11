@@ -49,7 +49,10 @@ public class EmployeeFunctionalConfig {
         return route(POST("/employees/reactive/update"),
                 req -> req.body(toMono(Employee.class))
                         .doOnNext(employeeRepository2()::updateEmployee)
-                        .then(ok().build()));
+                        .flatMap(empl -> ok()
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromValue(empl))));
+//                        .then(ok().build()));
     }
 
     // Return nothing
@@ -65,8 +68,9 @@ public class EmployeeFunctionalConfig {
     @Bean
     public RouterFunction<ServerResponse> root(EmployeeHandler employeeHandler) {
         return route()
-                .POST("/employees/reactive/add2", employeeHandler::addEmployee)
-                .POST("/employees/reactive/update2", employeeHandler::updateEmployee)
+                .POST("/employees/reactive/handler/add", employeeHandler::addEmployee)
+                .POST("/employees/reactive/handler/update", employeeHandler::updateEmployee)
+                .GET("/employees/reactive/handler/{id}", employeeHandler::getEmployeeById)
 //                .POST("/saveWriter", RequestPredicates.contentType(MediaType.APPLICATION_JSON), bookHandler::saveWriter)
                 .build();
     }
