@@ -10,10 +10,10 @@ Thumbs.db
 
 # Build Artifacts
 
-.gradle/
-.mvn/
+# .gradle/
+# .mvn/
 .idea/
-gradle/
+# gradle/
 build/
 target/
 bin/
