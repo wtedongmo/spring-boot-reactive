@@ -5,7 +5,9 @@ language: java
 branches:
   only:
   - master
-script: mvn clean package
+script:
+  - mvn test -B
+  - mvn clean package
 #- test/run.sh
 notifications:
   email:
