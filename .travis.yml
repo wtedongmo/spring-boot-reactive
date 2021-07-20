@@ -1,12 +1,12 @@
-sudo: false
+#sudo: false
 language: java
 jdk:
 - oraclejdk8
 branches:
   only:
   - master
-script:
-- test/run.sh
+script: mvn clean package
+#- test/run.sh
 notifications:
   email:
   - wtedongmo@gmail.com
