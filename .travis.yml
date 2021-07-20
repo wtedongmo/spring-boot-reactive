@@ -1,7 +1,9 @@
-sudo: true
 language: java
+sudo: true
 jdk:
 - openjdk8
+before_install:
+- chmod +x mvnw
 branches:
   only:
   - master
